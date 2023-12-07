@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consulta de API</title>
+  </head>
+  <body>
+    <h1>Consulta de API</h1>
+    <div id="resultados"></div>
+
+    <script>
+      // URL de la API (ejemplo con JSONPlaceholder)
+      const apiUrl =
+        "https://urban-rotary-phone-v6gwpg9vwgqcp4q6-3000.app.github.dev/api/pokemon";
+
+      // Realizar la solicitud GET usando fetch
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Manejar los datos obtenidos de la API
+          const resultadosDiv = document.getElementById("resultados");
+          resultadosDiv.innerHTML = "<h2>Resultados:</h2>";
+          data.forEach((user) => {
+            resultadosDiv.innerHTML += `<p>${user.id}: ${user.name}</p>`;
+          });
+        })
+        .catch((error) => {
+          console.error("Error al realizar la solicitud:", error);
+        });
+    </script>
+  </body>
+</html>
